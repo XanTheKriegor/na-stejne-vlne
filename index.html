@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<title>Na stejné vlně</title>
+<title>Tohle nebo tohle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -11,7 +11,6 @@
   :root{
     --ink:#1A1420;
     --ink-2:#241C2C;
-    --ink-3:#2E2337;
     --gold:#C9A24B;
     --gold-bright:#E0BD6E;
     --text-light:#F4EEE8;
@@ -47,9 +46,9 @@
   input[type=text]{
     width:100%; background:var(--ink); border:1px solid rgba(168,153,143,0.28);
     color:var(--text-light); border-radius:10px; padding:13px 14px;
-    font-family:var(--sans); font-size:16px;
+    font-family:var(--sans); font-size:16px; text-align:center;
+    text-transform:uppercase; letter-spacing:.1em;
   }
-  input[type=text].code-input{ text-align:center; text-transform:uppercase; letter-spacing:.1em; }
   input[type=text]:focus{outline:2px solid var(--gold); outline-offset:1px; border-color:transparent;}
   button{
     font-family:var(--sans); font-weight:700; font-size:15px; border-radius:10px;
@@ -81,16 +80,6 @@
   .slot-label{font-size:14.5px; font-weight:600;}
   .slot-status{margin-left:auto; font-size:12.5px; color:var(--text-muted);}
 
-  .set-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:18px;}
-  .set-btn{
-    background:var(--ink); border:1px solid rgba(168,153,143,0.25); border-radius:10px;
-    padding:10px 6px; text-align:center; cursor:pointer;
-  }
-  .set-btn.active{border-color:var(--gold); background:rgba(201,162,75,0.1);}
-  .set-btn .set-num{font-family:var(--serif); font-size:14px; font-weight:600; color:var(--text-light);}
-  .set-btn.active .set-num{color:var(--gold-bright);}
-  .set-btn .set-name{font-size:10.5px; color:var(--text-muted); margin-top:2px; line-height:1.3;}
-
   .my-role-badge{
     display:flex; align-items:center; justify-content:center; gap:8px;
     font-size:13.5px; font-weight:600; color:var(--text-light);
@@ -108,14 +97,19 @@
   .progress-bar{height:5px; border-radius:3px; background:rgba(168,153,143,0.15); overflow:hidden; margin:14px 0 22px 0;}
   .progress-fill{height:100%; background:linear-gradient(90deg, var(--gold), var(--gold-bright)); transition:width .3s ease;}
 
-  .question-box{
-    text-align:center; padding:22px 10px; margin-bottom:20px;
+  .vs-row{display:flex; align-items:stretch; gap:10px; margin-bottom:20px;}
+  .opt-btn{
+    flex:1; background:var(--ink); border:2px solid rgba(168,153,143,0.25);
+    color:var(--text-light); font-family:var(--serif); font-size:18px; font-weight:600;
+    border-radius:14px; padding:26px 12px; text-align:center; line-height:1.3;
   }
-  .question-eyebrow{font-size:12px; text-transform:uppercase; letter-spacing:.14em; color:var(--text-muted); margin-bottom:10px;}
-  .question-text{font-family:var(--serif); font-size:26px; font-weight:600; line-height:1.3;}
-
-  .answer-input{margin-bottom:14px;}
-  .waiting-note{text-align:center; color:var(--text-muted); font-size:14px; margin-bottom:16px; line-height:1.5;}
+  .opt-btn.selected{border-color:var(--gold-bright); background:rgba(201,162,75,0.14); color:var(--gold-bright);}
+  .vs-mid{
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--serif); font-size:13px; color:var(--text-muted);
+    text-transform:uppercase; letter-spacing:.1em; width:28px; flex-shrink:0;
+  }
+  .waiting-note{text-align:center; color:var(--text-muted); font-size:14px; margin-top:4px; line-height:1.5;}
   .waiting-note strong{color:var(--text-light);}
 
   .reveal-row{display:flex; gap:12px; margin-bottom:18px;}
@@ -126,7 +120,7 @@
   .reveal-card.p1{border-color:rgba(240,145,127,0.35);}
   .reveal-card.p2{border-color:rgba(111,191,176,0.35);}
   .reveal-card .who{font-size:12px; color:var(--text-muted); margin-bottom:8px; font-weight:600;}
-  .reveal-card .ans{font-family:var(--serif); font-size:22px; font-weight:700; word-break:break-word;}
+  .reveal-card .ans{font-family:var(--serif); font-size:18px; font-weight:700; word-break:break-word;}
   .reveal-card.p1 .ans{color:var(--p1);} .reveal-card.p2 .ans{color:var(--p2);}
   .match-banner{
     text-align:center; padding:14px; border-radius:12px; margin-bottom:18px; font-weight:700; font-size:15px;
@@ -143,7 +137,7 @@
   }
   .recap-icon{width:20px; text-align:center; flex-shrink:0; font-size:14px;}
   .recap-q{flex:1; color:var(--text-muted);}
-  .recap-a{font-weight:600; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:130px;}
+  .recap-a{font-weight:600; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:150px;}
   .footnote{text-align:center; color:var(--text-muted); font-size:12px; line-height:1.6; margin-top:18px; opacity:.75;}
 </style>
 </head>
@@ -161,72 +155,51 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-const GAMES = 'wavelength2';
+const GAMES = 'thisorthat2';
 const app = document.getElementById('app');
 const TOTAL_ROUNDS = 10;
 const ROLE_LABEL = { p1:'Hráč 1', p2:'Hráč 2' };
 
-const QUESTION_SETS = [
-  { name: 'Základ', questions: [
-    "Číslo od 1 do 10",
-    "Barva",
-    "Zvíře",
-    "Ovoce",
-    "Roční období",
-    "Den v týdnu",
-    "Písmeno abecedy",
-    "Sladkost",
-    "Nápoj",
-    "Sport"
-  ]},
-  { name: 'My dva', questions: [
-    "Slovo, které popisuje váš vztah",
-    "Místo na první rande, kdybyste ho měli zopakovat",
-    "Jméno pro psa nebo kočku, kterého byste si spolu pořídili",
-    "Věc v domácnosti, kterou máte oba nejraději",
-    "Zvíře, které vás nejvíc vystihuje jako pár",
-    "Píseň, která by mohla být \"vaše\"",
-    "Slovo na dnešní náladu",
-    "Co byste si přáli k výročí",
-    "Místo, kde byste chtěli zestárnout",
-    "Vlastnost, kterou na tom druhém milujete nejvíc, jedním slovem"
-  ]},
-  { name: 'Fantazie a sny', questions: [
-    "Superschopnost, kterou byste chtěli mít",
-    "Planeta, na kterou byste se chtěli podívat",
-    "Postava z pohádky nebo filmu, kterou byste chtěli potkat",
-    "Kdybyste byli zvíře, jaké?",
-    "Kouzlo, které byste si přáli umět",
-    "Éra nebo století, ve kterém byste chtěli žít",
-    "Superhrdina, kterým byste chtěli být",
-    "Kdybyste vyhráli milion, první věc, co koupíte",
-    "Vlastnost, kterou byste chtěli mít navíc",
-    "Jméno pro budoucího mazlíčka"
-  ]},
-  { name: 'Všední den', questions: [
-    "Co byste si dali k snídani",
-    "Jídlo k večeři",
-    "Film, který byste si teď pustili",
-    "Kniha nebo žánr, co byste si teď přečetli",
-    "Hudební nástroj, na který byste se chtěli naučit hrát",
-    "Aplikace v telefonu, kterou používáte nejvíc",
-    "Denní doba, kdy jste nejvíc produktivní",
-    "Věc, na kterou byste se dnes nejvíc těšili po práci",
-    "Emoji, které vystihuje váš den",
-    "Co byste udělali s volným odpolednem navíc"
-  ]},
-  { name: 'Dobrodružství a touhy', questions: [
-    "Dovolenkový cíl snů",
-    "Město, kam byste chtěli spolu vycestovat",
-    "Věc, kterou byste si vzali na pustý ostrov",
-    "Sport, který byste chtěli spolu vyzkoušet",
-    "Adrenalinový zážitek, co byste chtěli zažít",
-    "Země, kde byste chtěli žít rok",
-    "Dopravní prostředek na příští výlet",
-    "Kuchyně nebo styl restaurace, co chcete vyzkoušet",
-    "Festival nebo akce, kam byste chtěli spolu jet",
-    "Jedna věc na vašem společném bucket listu"
-  ]}
+const QUESTION_POOL = [
+  ["Hory","Moře"],["Město","Příroda"],["Kemp","Hotel"],["Letadlo","Auto"],
+  ["Evropa","Exotika"],["Letní dovolená","Zimní dovolená"],["Aktivní dovolená","Odpočinková dovolená"],
+  ["Malé městečko","Velkoměsto"],["Batoh","Kufr"],["Spontánní výlet","Naplánovaný výlet"],
+  ["Chata","Apartmán"],["Sever","Jih"],["Pláž","Bazén"],["Túra v horách","Pláž s knížkou"],
+  ["Vlak","Auto"],["Stan","Karavan"],["Ostrov","Pevnina"],["Wellness pobyt","Dobrodružný pobyt"],
+  ["Dovolená sami dva","Dovolená s přáteli"],["Historické památky","Národní parky a příroda"],
+  ["Sladké","Slané"],["Pizza","Sushi"],["Vydatná snídaně","Vydatná večeře"],
+  ["Vaření doma","Restaurace"],["Káva","Čaj"],["Čokoláda","Zmrzlina"],
+  ["Ostré jídlo","Jemné jídlo"],["Maso","Vegetariánské jídlo"],["Rychlé občerstvení","Pomalu vařené jídlo"],
+  ["Víno","Pivo"],["Domácí pečení","Kupovaný dort"],["Snídaně v posteli","Brunch venku"],
+  ["Italská kuchyně","Asijská kuchyně"],["Grilování","Vaření v kuchyni"],["Chipsy","Ořechy"],
+  ["Limonáda","Voda s citronem"],["Palačinky","Vafle"],["Polévka","Salát"],
+  ["Domácí pizza","Objednaná pizza"],["Cereálie","Toast"],
+  ["Ranní ptáče","Noční sova"],["Byt ve městě","Dům na venkově"],["Pes","Kočka"],
+  ["Minimalismus","Spousta dekorací"],["Čistota především","Trocha nepořádku nevadí"],
+  ["Televize večer","Kniha večer"],["Sprcha ráno","Sprcha večer"],["Topení na max","Radši deka"],
+  ["Otevřené okno v noci","Zavřené okno v noci"],["Vlastní zahrada","Terasa nebo balkon"],
+  ["Velký gauč","Velká postel"],["Svíčky","Umělé osvětlení"],["Chytrá domácnost","Klasické spínače"],
+  ["Rostliny po celém bytě","Minimum rostlin"],["Vlastní pracovna","Práce z gauče"],
+  ["Ticho při práci","Hudba na pozadí"],["Ranní sport","Večerní sport"],
+  ["Klimatizace","Ventilátor"],["Polštáře všude","Minimalistický gauč"],["Koupel","Sprcha"],
+  ["Film v kině","Film doma"],["Komedie","Drama"],["Koncert","Divadlo"],
+  ["Karty","Deskovky"],["Čtení","Poslech podcastu"],["Ranní běh","Večerní procházka"],
+  ["Fitko","Cvičení doma"],["Sledování seriálu","Sledování filmu"],
+  ["Nová hudba","Oblíbené staré písničky"],["Fotky z výletu","Zážitky bez focení"],
+  ["Horor","Komedie"],["Autorský film","Mainstreamový trhák"],["Karaoke","Tanec"],
+  ["Piknik","Restaurace"],["Focení","Kreslení"],["Puzzle","Deskovka"],
+  ["Ranní jóga","Večerní jóga"],["Adrenalin","Klid a pohoda"],["Rybaření","Turistika"],
+  ["Muzeum","Zoo"],
+  ["Milion teď","Dvojnásobek za 5 let"],["Slavný","Anonymní a šťastný"],
+  ["Umět létat","Umět číst myšlenky"],["Žít bez telefonu měsíc","Žít bez sladkého měsíc"],
+  ["Vrátit se v čase","Vidět budoucnost"],["Mluvit se zvířaty","Mluvit všemi jazyky"],
+  ["Věčné mládí","Nekonečná moudrost"],["Být neviditelný","Umět teleportovat"],
+  ["Žít 100 let sám","Žít 60 let s někým"],["Vlastní firma","Jistá práce v korporátu"],
+  ["Méně spánku, víc času","Víc spánku, míň času"],["Velká svatba","Malá svatba jen ve dvou"],
+  ["Žít ve městě snů","Žít blízko rodiny"],["Vlastnit dům","Cestovat po světě bez kotvy"],
+  ["Být šéf","Být nejlepší ve svém oboru jako zaměstnanec"],["Znát datum své smrti","Nevědět nic dopředu"],
+  ["Umět famózně vařit","Umět skvěle tancovat"],["Mít víc peněz","Mít víc času"],
+  ["Žít bez internetu měsíc","Žít bez auta měsíc"],["Vždy znát pravdu","Nikdy nezažít zklamání"]
 ];
 
 let state = {
@@ -235,10 +208,8 @@ let state = {
   role: null,
   unsubscribe: null,
   data: null,
-  answerText: '',
-  revealAdvancing: false,
-  lastRoundSeenPlaying: 0,
-  lobbySet: 1
+  selectedOption: null,
+  lastRoundSeenPlaying: 0
 };
 
 function genCode(){
@@ -248,22 +219,20 @@ function genCode(){
   return c;
 }
 
-function normalize(s){
-  return (s||'').trim().toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/\s+/g,' ');
-}
-
-function getQuestionSet(setNumber){
-  const idx = Math.min(Math.max(setNumber,1),QUESTION_SETS.length) - 1;
-  return QUESTION_SETS[idx].questions.slice();
+function pickQuestions(){
+  const pool = QUESTION_POOL.slice();
+  for(let i=pool.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [pool[i],pool[j]] = [pool[j],pool[i]];
+  }
+  return pool.slice(0, TOTAL_ROUNDS);
 }
 
 function shell(inner){
   app.innerHTML = `
     <p class="eyebrow">Pro dva &middot; deset otázek</p>
-    <h1>Na stejné vlně</h1>
-    <p class="sub">Odpovězte nezávisle na sobě. Shodnete se, nebo jde každý svou hlavou?</p>
+    <h1>Tohle nebo tohle</h1>
+    <p class="sub">U každé dvojice zvolte, co byste si vybrali. Trefíte se do stejné volby?</p>
     ${renderMyRoleBadge()}
     ${inner}
   `;
@@ -292,7 +261,7 @@ function renderHome(){
       <h2>Mám kód</h2>
       <p class="hint">Připojíš se jako druhý hráč.</p>
       <div class="field" style="margin-bottom:14px;">
-        <input type="text" class="code-input" id="joinCodeInput" placeholder="např. K7QX2" maxlength="5">
+        <input type="text" id="joinCodeInput" placeholder="např. K7QX2" maxlength="5">
       </div>
       <button class="btn-secondary" onclick="submitJoinCode()">Připojit se</button>
       <p class="error-text" id="joinError"></p>
@@ -307,7 +276,6 @@ async function createLobby(){
       players: { p1:{joined:true}, p2:{joined:false} },
       status: 'lobby',
       round: 1,
-      questionSet: 1,
       questions: [],
       currentAnswers: { p1:null, p2:null },
       scores: { p1:0, p2:0 },
@@ -356,7 +324,7 @@ async function submitJoinCode(){
 function leaveToHome(){
   if(state.unsubscribe) state.unsubscribe();
   state = { screen:'home', code:null, role:null, unsubscribe:null, data:null,
-    answerText:'', revealAdvancing:false, lastRoundSeenPlaying:0, lobbySet:1 };
+    selectedOption:null, lastRoundSeenPlaying:0 };
   render();
 }
 
@@ -375,8 +343,7 @@ function onRoomUpdate(){
   if(d.status === 'playing'){
     if(d.round !== state.lastRoundSeenPlaying){
       state.lastRoundSeenPlaying = d.round;
-      state.answerText = '';
-      state.revealAdvancing = false;
+      state.selectedOption = null;
     }
     state.screen = 'game';
     render();
@@ -399,12 +366,6 @@ function renderLobby(){
       ${slotRow('p1', true)}
       ${slotRow('p2', p2ok)}
       ${state.role==='p1' ? `
-        <div class="set-picker" style="margin-top:18px;">
-          <p class="hint" style="margin-bottom:10px;">Vyber sadu otázek:</p>
-          <div class="set-grid">
-            ${QUESTION_SETS.map((s,i)=>setBtn(i+1)).join('')}
-          </div>
-        </div>
         <button class="btn-primary" ${p2ok?'':'disabled'} onclick="startGame()">
           ${p2ok ? 'Spustit hru' : 'Čeká se na druhého hráče…'}
         </button>
@@ -412,22 +373,6 @@ function renderLobby(){
     </div>
     <button class="btn-ghost" onclick="leaveToHome()">&larr; Odejít</button>
   `);
-}
-
-function setBtn(n){
-  const active = state.lobbySet === n;
-  const setInfo = QUESTION_SETS[n-1];
-  return `
-    <div class="set-btn ${active?'active':''}" onclick="chooseLobbySet(${n})">
-      <div class="set-num">Sada ${n}</div>
-      <div class="set-name">${setInfo.name}</div>
-    </div>
-  `;
-}
-
-function chooseLobbySet(n){
-  state.lobbySet = n;
-  render();
 }
 
 function slotRow(role, filled){
@@ -442,10 +387,9 @@ function slotRow(role, filled){
 }
 
 async function startGame(){
-  const questions = getQuestionSet(state.lobbySet);
+  const questions = pickQuestions();
   await db.collection(GAMES).doc(state.code).set({
     status:'playing', round:1,
-    questionSet: state.lobbySet,
     questions,
     currentAnswers:{p1:null,p2:null},
     scores:{p1:0,p2:0},
@@ -460,7 +404,7 @@ function renderGame(){
   if(d.status === 'reveal'){ renderReveal(); return; }
 
   const myAnswered = d.currentAnswers[state.role] !== null;
-  const question = d.questions[d.round-1];
+  const pair = d.questions[d.round-1];
 
   shell(`
     <div class="card">
@@ -469,24 +413,18 @@ function renderGame(){
         <div class="score-line"><span class="num">${d.scores.p1}</span> shod</div>
       </div>
       <div class="progress-bar"><div class="progress-fill" style="width:${(d.round-1)/TOTAL_ROUNDS*100}%"></div></div>
-      <div class="question-box">
-        <div class="question-eyebrow">Zamysli se, co by mohl(a) napsat i ten druhý</div>
-        <div class="question-text">${escapeHtml(question)}</div>
-      </div>
       ${myAnswered ? `
         <p class="waiting-note">Odpověď odeslána. Čeká se na <strong>${ROLE_LABEL[state.role==='p1'?'p2':'p1']}</strong>…</p>
       ` : `
-        <div class="answer-input">
-          <input type="text" id="answerInput" placeholder="Tvoje odpověď…" maxlength="40" value="${escapeHtml(state.answerText)}" oninput="state.answerText=this.value" onkeydown="if(event.key==='Enter') submitAnswer();">
+        <div class="vs-row">
+          <div class="opt-btn ${state.selectedOption==='a'?'selected':''}" onclick="selectOption('a')">${escapeHtml(pair[0])}</div>
+          <div class="vs-mid">nebo</div>
+          <div class="opt-btn ${state.selectedOption==='b'?'selected':''}" onclick="selectOption('b')">${escapeHtml(pair[1])}</div>
         </div>
-        <button class="btn-primary" onclick="submitAnswer()">Odeslat odpověď</button>
+        <button class="btn-primary" ${state.selectedOption===null?'disabled':''} onclick="confirmOption()">Potvrdit výběr</button>
       `}
     </div>
   `);
-  if(!myAnswered){
-    const inp = document.getElementById('answerInput');
-    if(inp) inp.focus();
-  }
 }
 
 function escapeHtml(s){
@@ -495,11 +433,15 @@ function escapeHtml(s){
   return el.innerHTML;
 }
 
-async function submitAnswer(){
-  const val = (state.answerText || '').trim();
-  if(!val) return;
+function selectOption(opt){
+  state.selectedOption = opt;
+  render();
+}
+
+async function confirmOption(){
+  if(state.selectedOption === null) return;
   await db.collection(GAMES).doc(state.code).set({
-    currentAnswers: { [state.role]: val }
+    currentAnswers: { [state.role]: state.selectedOption }
   }, { merge:true });
 }
 
@@ -513,15 +455,12 @@ function renderReveal(){
         <div class="round-badge">Otázka ${res ? res.round : d.round} / ${TOTAL_ROUNDS}</div>
         <div class="score-line"><span class="num">${d.scores.p1}</span> shod</div>
       </div>
-      <div class="question-box" style="padding-top:4px;">
-        <div class="question-text" style="font-size:19px;">${escapeHtml(res ? res.question : '')}</div>
-      </div>
       <div class="reveal-row">
-        <div class="reveal-card p1"><div class="who">${ROLE_LABEL.p1}</div><div class="ans">${escapeHtml(res?res.answers.p1:'')}</div></div>
-        <div class="reveal-card p2"><div class="who">${ROLE_LABEL.p2}</div><div class="ans">${escapeHtml(res?res.answers.p2:'')}</div></div>
+        <div class="reveal-card p1"><div class="who">${ROLE_LABEL.p1}</div><div class="ans">${res?escapeHtml(labelFor(res.pair, res.answers.p1)):''}</div></div>
+        <div class="reveal-card p2"><div class="who">${ROLE_LABEL.p2}</div><div class="ans">${res?escapeHtml(labelFor(res.pair, res.answers.p2)):''}</div></div>
       </div>
       <div class="match-banner ${res && res.matched ? 'yes':'no'}">
-        ${res && res.matched ? 'Shoda! Jste na stejné vlně.' : 'Tentokrát ne — každý jinam.'}
+        ${res && res.matched ? 'Shoda! Vybrali jste stejně.' : 'Tentokrát ne — každý jinam.'}
       </div>
       <button class="btn-primary" onclick="attemptAdvance()">${isLast ? 'Zobrazit výsledek' : 'Další otázka'}</button>
     </div>
@@ -544,11 +483,11 @@ async function maybeResolveRound(){
       if(fd.status !== 'playing' || fd.round !== expectedRound) return;
       const fa = fd.currentAnswers;
       if(fa.p1 === null || fa.p2 === null) return;
-      const matched = normalize(fa.p1) === normalize(fa.p2) && normalize(fa.p1) !== '';
+      const matched = fa.p1 === fa.p2;
       const newScores = Object.assign({}, fd.scores);
       if(matched){ newScores.p1 += 1; newScores.p2 += 1; }
-      const question = fd.questions[expectedRound-1];
-      const resultEntry = { round: expectedRound, question, answers: {p1:fa.p1, p2:fa.p2}, matched };
+      const pair = fd.questions[expectedRound-1];
+      const resultEntry = { round: expectedRound, pair, answers: {p1:fa.p1, p2:fa.p2}, matched };
       tx.update(ref, {
         status: 'reveal',
         scores: newScores,
@@ -591,17 +530,24 @@ function tierMessage(score){
   return 'Naprosto odlišné mozky. Aspoň je to zábava.';
 }
 
+function labelFor(pair, opt){ return opt === 'a' ? pair[0] : pair[1]; }
+
 function renderFinal(){
   const d = state.data;
   const score = d.scores.p1;
   const history = (d.history || []).slice().sort((a,b)=>a.round-b.round);
-  const recap = history.map(h=>`
-    <div class="recap-item">
-      <div class="recap-icon">${h.matched?'✓':'✕'}</div>
-      <div class="recap-q">${escapeHtml(h.question)}</div>
-      <div class="recap-a">${escapeHtml(h.answers.p1)} / ${escapeHtml(h.answers.p2)}</div>
-    </div>
-  `).join('');
+  const recap = history.map(h=>{
+    const p1label = labelFor(h.pair, h.answers.p1);
+    const p2label = labelFor(h.pair, h.answers.p2);
+    const answerText = h.matched ? p1label : (p1label + ' / ' + p2label);
+    return `
+      <div class="recap-item">
+        <div class="recap-icon">${h.matched?'✓':'✕'}</div>
+        <div class="recap-q">${escapeHtml(h.pair[0])} / ${escapeHtml(h.pair[1])}</div>
+        <div class="recap-a">${escapeHtml(answerText)}</div>
+      </div>
+    `;
+  }).join('');
   shell(`
     <div class="card">
       <div class="final-score">${score}/${TOTAL_ROUNDS}</div>
@@ -618,9 +564,10 @@ function renderFinal(){
 }
 
 async function playAgain(){
+  const questions = pickQuestions();
   await db.collection(GAMES).doc(state.code).set({
-    status:'lobby', round:1,
-    questions:[],
+    status:'playing', round:1,
+    questions,
     currentAnswers:{p1:null,p2:null},
     scores:{p1:0,p2:0},
     lastRoundResult:null, resolvedRound:0,
