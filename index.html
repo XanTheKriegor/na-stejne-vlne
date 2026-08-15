@@ -161,45 +161,40 @@ const TOTAL_ROUNDS = 10;
 const ROLE_LABEL = { p1:'Hráč 1', p2:'Hráč 2' };
 
 const QUESTION_POOL = [
-  ["Hory","Moře"],["Město","Příroda"],["Kemp","Hotel"],["Letadlo","Auto"],
-  ["Evropa","Exotika"],["Letní dovolená","Zimní dovolená"],["Aktivní dovolená","Odpočinková dovolená"],
-  ["Malé městečko","Velkoměsto"],["Batoh","Kufr"],["Spontánní výlet","Naplánovaný výlet"],
-  ["Chata","Apartmán"],["Sever","Jih"],["Pláž","Bazén"],["Túra v horách","Pláž s knížkou"],
-  ["Vlak","Auto"],["Stan","Karavan"],["Ostrov","Pevnina"],["Wellness pobyt","Dobrodružný pobyt"],
-  ["Dovolená sami dva","Dovolená s přáteli"],["Historické památky","Národní parky a příroda"],
-  ["Sladké","Slané"],["Pizza","Sushi"],["Vydatná snídaně","Vydatná večeře"],
-  ["Vaření doma","Restaurace"],["Káva","Čaj"],["Čokoláda","Zmrzlina"],
-  ["Ostré jídlo","Jemné jídlo"],["Maso","Vegetariánské jídlo"],["Rychlé občerstvení","Pomalu vařené jídlo"],
-  ["Víno","Pivo"],["Domácí pečení","Kupovaný dort"],["Snídaně v posteli","Brunch venku"],
-  ["Italská kuchyně","Asijská kuchyně"],["Grilování","Vaření v kuchyni"],["Chipsy","Ořechy"],
-  ["Limonáda","Voda s citronem"],["Palačinky","Vafle"],["Polévka","Salát"],
-  ["Domácí pizza","Objednaná pizza"],["Cereálie","Toast"],
-  ["Ranní ptáče","Noční sova"],["Byt ve městě","Dům na venkově"],["Pes","Kočka"],
-  ["Minimalismus","Spousta dekorací"],["Čistota především","Trocha nepořádku nevadí"],
-  ["Televize večer","Kniha večer"],["Sprcha ráno","Sprcha večer"],["Topení na max","Radši deka"],
-  ["Otevřené okno v noci","Zavřené okno v noci"],["Vlastní zahrada","Terasa nebo balkon"],
-  ["Velký gauč","Velká postel"],["Svíčky","Umělé osvětlení"],["Chytrá domácnost","Klasické spínače"],
-  ["Rostliny po celém bytě","Minimum rostlin"],["Vlastní pracovna","Práce z gauče"],
-  ["Ticho při práci","Hudba na pozadí"],["Ranní sport","Večerní sport"],
-  ["Klimatizace","Ventilátor"],["Polštáře všude","Minimalistický gauč"],["Koupel","Sprcha"],
-  ["Film v kině","Film doma"],["Komedie","Drama"],["Koncert","Divadlo"],
-  ["Karty","Deskovky"],["Čtení","Poslech podcastu"],["Ranní běh","Večerní procházka"],
-  ["Fitko","Cvičení doma"],["Sledování seriálu","Sledování filmu"],
-  ["Nová hudba","Oblíbené staré písničky"],["Fotky z výletu","Zážitky bez focení"],
-  ["Horor","Komedie"],["Autorský film","Mainstreamový trhák"],["Karaoke","Tanec"],
-  ["Piknik","Restaurace"],["Focení","Kreslení"],["Puzzle","Deskovka"],
-  ["Ranní jóga","Večerní jóga"],["Adrenalin","Klid a pohoda"],["Rybaření","Turistika"],
-  ["Muzeum","Zoo"],
-  ["Milion teď","Dvojnásobek za 5 let"],["Slavný","Anonymní a šťastný"],
-  ["Umět létat","Umět číst myšlenky"],["Žít bez telefonu měsíc","Žít bez sladkého měsíc"],
-  ["Vrátit se v čase","Vidět budoucnost"],["Mluvit se zvířaty","Mluvit všemi jazyky"],
-  ["Věčné mládí","Nekonečná moudrost"],["Být neviditelný","Umět teleportovat"],
-  ["Žít 100 let sám","Žít 60 let s někým"],["Vlastní firma","Jistá práce v korporátu"],
-  ["Méně spánku, víc času","Víc spánku, míň času"],["Velká svatba","Malá svatba jen ve dvou"],
-  ["Žít ve městě snů","Žít blízko rodiny"],["Vlastnit dům","Cestovat po světě bez kotvy"],
-  ["Být šéf","Být nejlepší ve svém oboru jako zaměstnanec"],["Znát datum své smrti","Nevědět nic dopředu"],
-  ["Umět famózně vařit","Umět skvěle tancovat"],["Mít víc peněz","Mít víc času"],
-  ["Žít bez internetu měsíc","Žít bez auta měsíc"],["Vždy znát pravdu","Nikdy nezažít zklamání"]
+ {a:"Hory",b:"Moře"}, {a:"Město",b:"Příroda"}, {a:"Kemp",b:"Hotel"},
+ {a:"Letadlo",b:"Auto"}, {a:"Evropa",b:"Exotika"}, {a:"Letní dovolená",b:"Zimní dovolená"},
+ {a:"Aktivní dovolená",b:"Odpočinková dovolená"}, {a:"Malé městečko",b:"Velkoměsto"}, {a:"Batoh",b:"Kufr"},
+ {a:"Spontánní výlet",b:"Naplánovaný výlet"}, {a:"Chata",b:"Apartmán"}, {a:"Sever",b:"Jih"},
+ {a:"Pláž",b:"Bazén"}, {a:"Túra v horách",b:"Pláž s knížkou"}, {a:"Vlak",b:"Auto"},
+ {a:"Stan",b:"Karavan"}, {a:"Ostrov",b:"Pevnina"}, {a:"Wellness pobyt",b:"Dobrodružný pobyt"},
+ {a:"Dovolená sami dva",b:"Dovolená s přáteli"}, {a:"Historické památky",b:"Národní parky a příroda"}, {a:"Sladké",b:"Slané"},
+ {a:"Pizza",b:"Sushi"}, {a:"Vydatná snídaně",b:"Vydatná večeře"}, {a:"Vaření doma",b:"Restaurace"},
+ {a:"Káva",b:"Čaj"}, {a:"Čokoláda",b:"Zmrzlina"}, {a:"Ostré jídlo",b:"Jemné jídlo"},
+ {a:"Maso",b:"Vegetariánské jídlo"}, {a:"Rychlé občerstvení",b:"Pomalu vařené jídlo"}, {a:"Víno",b:"Pivo"},
+ {a:"Domácí pečení",b:"Kupovaný dort"}, {a:"Snídaně v posteli",b:"Brunch venku"}, {a:"Italská kuchyně",b:"Asijská kuchyně"},
+ {a:"Grilování",b:"Vaření v kuchyni"}, {a:"Chipsy",b:"Ořechy"}, {a:"Limonáda",b:"Voda s citronem"},
+ {a:"Palačinky",b:"Vafle"}, {a:"Polévka",b:"Salát"}, {a:"Domácí pizza",b:"Objednaná pizza"},
+ {a:"Cereálie",b:"Toast"}, {a:"Ranní ptáče",b:"Noční sova"}, {a:"Byt ve městě",b:"Dům na venkově"},
+ {a:"Pes",b:"Kočka"}, {a:"Minimalismus",b:"Spousta dekorací"}, {a:"Čistota především",b:"Trocha nepořádku nevadí"},
+ {a:"Televize večer",b:"Kniha večer"}, {a:"Sprcha ráno",b:"Sprcha večer"}, {a:"Topení na max",b:"Radši deka"},
+ {a:"Otevřené okno v noci",b:"Zavřené okno v noci"}, {a:"Vlastní zahrada",b:"Terasa nebo balkon"}, {a:"Velký gauč",b:"Velká postel"},
+ {a:"Svíčky",b:"Umělé osvětlení"}, {a:"Chytrá domácnost",b:"Klasické spínače"}, {a:"Rostliny po celém bytě",b:"Minimum rostlin"},
+ {a:"Vlastní pracovna",b:"Práce z gauče"}, {a:"Ticho při práci",b:"Hudba na pozadí"}, {a:"Ranní sport",b:"Večerní sport"},
+ {a:"Klimatizace",b:"Ventilátor"}, {a:"Polštáře všude",b:"Minimalistický gauč"}, {a:"Koupel",b:"Sprcha"},
+ {a:"Film v kině",b:"Film doma"}, {a:"Komedie",b:"Drama"}, {a:"Koncert",b:"Divadlo"},
+ {a:"Karty",b:"Deskovky"}, {a:"Čtení",b:"Poslech podcastu"}, {a:"Ranní běh",b:"Večerní procházka"},
+ {a:"Fitko",b:"Cvičení doma"}, {a:"Sledování seriálu",b:"Sledování filmu"}, {a:"Nová hudba",b:"Oblíbené staré písničky"},
+ {a:"Fotky z výletu",b:"Zážitky bez focení"}, {a:"Horor",b:"Komedie"}, {a:"Autorský film",b:"Mainstreamový trhák"},
+ {a:"Karaoke",b:"Tanec"}, {a:"Piknik",b:"Restaurace"}, {a:"Focení",b:"Kreslení"},
+ {a:"Puzzle",b:"Deskovka"}, {a:"Ranní jóga",b:"Večerní jóga"}, {a:"Adrenalin",b:"Klid a pohoda"},
+ {a:"Rybaření",b:"Turistika"}, {a:"Muzeum",b:"Zoo"}, {a:"Milion teď",b:"Dvojnásobek za 5 let"},
+ {a:"Slavný",b:"Anonymní a šťastný"}, {a:"Umět létat",b:"Umět číst myšlenky"}, {a:"Žít bez telefonu měsíc",b:"Žít bez sladkého měsíc"},
+ {a:"Vrátit se v čase",b:"Vidět budoucnost"}, {a:"Mluvit se zvířaty",b:"Mluvit všemi jazyky"}, {a:"Věčné mládí",b:"Nekonečná moudrost"},
+ {a:"Být neviditelný",b:"Umět teleportovat"}, {a:"Žít 100 let sám",b:"Žít 60 let s někým"}, {a:"Vlastní firma",b:"Jistá práce v korporátu"},
+ {a:"Méně spánku, víc času",b:"Víc spánku, míň času"}, {a:"Velká svatba",b:"Malá svatba jen ve dvou"}, {a:"Žít ve městě snů",b:"Žít blízko rodiny"},
+ {a:"Vlastnit dům",b:"Cestovat po světě bez kotvy"}, {a:"Být šéf",b:"Být nejlepší ve svém oboru jako zaměstnanec"}, {a:"Znát datum své smrti",b:"Nevědět nic dopředu"},
+ {a:"Umět famózně vařit",b:"Umět skvěle tancovat"}, {a:"Mít víc peněz",b:"Mít víc času"}, {a:"Žít bez internetu měsíc",b:"Žít bez auta měsíc"},
+ {a:"Vždy znát pravdu",b:"Nikdy nezažít zklamání"},
 ];
 
 let state = {
@@ -427,9 +422,9 @@ function renderGame(){
         <p class="waiting-note">Odpověď odeslána. Čeká se na <strong>${ROLE_LABEL[state.role==='p1'?'p2':'p1']}</strong>…</p>
       ` : `
         <div class="vs-row">
-          <div class="opt-btn ${state.selectedOption==='a'?'selected':''}" onclick="selectOption('a')">${escapeHtml(pair[0])}</div>
+          <div class="opt-btn ${state.selectedOption==='a'?'selected':''}" onclick="selectOption('a')">${escapeHtml(pair.a)}</div>
           <div class="vs-mid">nebo</div>
-          <div class="opt-btn ${state.selectedOption==='b'?'selected':''}" onclick="selectOption('b')">${escapeHtml(pair[1])}</div>
+          <div class="opt-btn ${state.selectedOption==='b'?'selected':''}" onclick="selectOption('b')">${escapeHtml(pair.b)}</div>
         </div>
         <button class="btn-primary" ${state.selectedOption===null?'disabled':''} onclick="confirmOption()">Potvrdit výběr</button>
       `}
@@ -544,7 +539,7 @@ function tierMessage(score){
   return 'Naprosto odlišné mozky. Aspoň je to zábava.';
 }
 
-function labelFor(pair, opt){ return opt === 'a' ? pair[0] : pair[1]; }
+function labelFor(pair, opt){ return opt === 'a' ? pair.a : pair.b; }
 
 function renderFinal(){
   const d = state.data;
@@ -557,7 +552,7 @@ function renderFinal(){
     return `
       <div class="recap-item">
         <div class="recap-icon">${h.matched?'✓':'✕'}</div>
-        <div class="recap-q">${escapeHtml(h.pair[0])} / ${escapeHtml(h.pair[1])}</div>
+        <div class="recap-q">${escapeHtml(h.pair.a)} / ${escapeHtml(h.pair.b)}</div>
         <div class="recap-a">${escapeHtml(answerText)}</div>
       </div>
     `;
