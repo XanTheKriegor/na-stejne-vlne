@@ -313,7 +313,13 @@ async function submitJoinCode(){
     errEl.style.display = 'block';
     return;
   }
-  await ref.set({ players: { p2:{joined:true} } }, { merge:true });
+  try{
+    await ref.set({ players: { p2:{joined:true} } }, { merge:true });
+  }catch(e){
+    errEl.textContent = 'Nepodařilo se připojit: ' + (e && e.message ? e.message : e);
+    errEl.style.display = 'block';
+    return;
+  }
   state.code = val;
   state.role = 'p2';
   state.screen = 'lobby';
@@ -388,14 +394,18 @@ function slotRow(role, filled){
 
 async function startGame(){
   const questions = pickQuestions();
-  await db.collection(GAMES).doc(state.code).set({
-    status:'playing', round:1,
-    questions,
-    currentAnswers:{p1:null,p2:null},
-    scores:{p1:0,p2:0},
-    lastRoundResult:null, resolvedRound:0,
-    history:[]
-  }, { merge:true });
+  try{
+    await db.collection(GAMES).doc(state.code).set({
+      status:'playing', round:1,
+      questions,
+      currentAnswers:{p1:null,p2:null},
+      scores:{p1:0,p2:0},
+      lastRoundResult:null, resolvedRound:0,
+      history:[]
+    }, { merge:true });
+  }catch(e){
+    alert('Nepodařilo se spustit hru: ' + (e && e.message ? e.message : e));
+  }
 }
 
 // ---------------- GAME ----------------
@@ -440,9 +450,13 @@ function selectOption(opt){
 
 async function confirmOption(){
   if(state.selectedOption === null) return;
-  await db.collection(GAMES).doc(state.code).set({
-    currentAnswers: { [state.role]: state.selectedOption }
-  }, { merge:true });
+  try{
+    await db.collection(GAMES).doc(state.code).set({
+      currentAnswers: { [state.role]: state.selectedOption }
+    }, { merge:true });
+  }catch(e){
+    alert('Nepodařilo se odeslat odpověď: ' + (e && e.message ? e.message : e));
+  }
 }
 
 function renderReveal(){
